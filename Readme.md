@@ -22,13 +22,3 @@ webpack watches update & re-build automatically
 it need json response server.
 
 `python -m SimpleHTTPServer`
-
-## test
-
-tsx test
-
-`npm run test:tsx`
-
-ts test
-
-`npm run test:ts`
