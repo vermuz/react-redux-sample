@@ -22,6 +22,9 @@
     },
     "redux-thunk/redux-thunk.d.ts": {
       "commit": "a186b551aa4ce681a9a7d7c86c8a23c620c54d8c"
+    },
+    "axios/axios.d.ts": {
+      "commit": "42ef709d5206e33935380a73679ccaabeff3a7f0"
     }
   }
 }
