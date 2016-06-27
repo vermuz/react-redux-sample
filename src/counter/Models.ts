@@ -14,8 +14,7 @@ export interface MyAction {
 }
 
 export class DispatchActions {
-    private dispatch: (action: any) => any;
-    constructor(dispatch: (action: any) => any){
+    constructor(private dispatch: (action: any) => any){
         this.dispatch = dispatch
     }
 

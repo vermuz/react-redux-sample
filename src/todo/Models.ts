@@ -8,10 +8,7 @@ export interface TodoInterface {
 }
 
 export class Todo implements TodoInterface{
-    public id: number;
-    public text: string;
-    public isComplete: boolean;
-    constructor(id: number, text: string, isComplete: boolean){
+    constructor(public id: number, public text: string, public isComplete: boolean){
         this.id = id;
         this.text = text;
         this.isComplete = isComplete;
@@ -30,8 +27,7 @@ export interface MyAction {
 }
 
 export class DispatchActions {
-    private dispatch: (action: any) => any;
-    constructor(dispatch: (action: any) => any){
+    constructor(private dispatch: (action: any) => any){
         this.dispatch = dispatch
     }
 
