@@ -16,6 +16,11 @@ export class ChatRoot extends React.Component<Props, {}> {
     private ws: WebSocket;
 
     componentDidMount(){
+        if (WebSocket == undefined) {
+            alert('This browser is not support WebSocket.');
+            return
+        }
+        //FIXME: set your IP for external IP access.
         this.ws = new WebSocket("ws://localhost:3000/chat");
 
         this.ws.onopen = ((e: Event) => {
