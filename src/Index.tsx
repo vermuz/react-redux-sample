@@ -9,6 +9,7 @@ import TodoListRoot from "./todo/TodoListRoot";
 import {Provider} from "react-redux";
 import store from "./Store";
 import {Paths} from "./Models";
+import SoundRoot from "./sound/SoundRoot";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -17,6 +18,7 @@ ReactDOM.render(
                 <Route path={Paths.COUNTER} component={CounterRoot} />
                 <Route path={Paths.TODO} component={TodoListRoot} />
                 <Route path={Paths.CHAT} component={ChatRoot} />
+                <Route path={Paths.SOUND} component={SoundRoot} />
                 <Route path="*" component={NotFound} />
             </Route>
         </Router>

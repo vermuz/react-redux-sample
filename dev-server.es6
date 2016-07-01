@@ -40,6 +40,8 @@ wss.on('connection', function connection(ws) {
 
 app.use('/dist', express.static('dist'));
 
+app.use('/public', express.static('public'));
+
 app.get('/api/sample.json', (req, res) => {
   res.contentType('application/json');
   const obj = {"amount": 100};

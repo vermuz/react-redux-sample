@@ -15,6 +15,7 @@ export default class Root extends React.Component<Props, {}> {
                 <li><Link to={Paths.COUNTER} >Counter</Link></li>
                 <li><Link to={Paths.TODO} >Todo</Link></li>
                 <li><Link to={Paths.CHAT} >Chat</Link></li>
+                <li><Link to={Paths.SOUND} >Sound</Link></li>
                 <li><Link to="/random_url" >Notfound</Link></li>
                 {this.props.children}
             </div>
