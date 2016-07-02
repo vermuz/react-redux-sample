@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import CounterRoot from "./counter/CounterRoot";
 import ChatRoot from "./chat/ChatRoot";
 import TodoListRoot from "./todo/TodoListRoot";
+import BootStrapRoot from "./bootstrap/BootStrapRoot";
 import {Provider} from "react-redux";
 import store from "./Store";
 import {Paths} from "./Models";
@@ -17,6 +18,7 @@ ReactDOM.render(
                 <Route path={Paths.COUNTER} component={CounterRoot} />
                 <Route path={Paths.TODO} component={TodoListRoot} />
                 <Route path={Paths.CHAT} component={ChatRoot} />
+                <Route path={Paths.BOOT_STRAP} component={BootStrapRoot} />
                 <Route path="*" component={NotFound} />
             </Route>
         </Router>
