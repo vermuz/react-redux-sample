@@ -4,9 +4,12 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "tsd install",
-    "build": "webpack --progress --colors --watch"
+    "build": "webpack --progress --colors --watch",
+    "server": "node dev-server.es6"
   },
   "devDependencies": {
+    "express": "^4.14.0",
+    "sleep": "^3.0.1",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
     "tsd": "^0.6.5",
@@ -16,6 +19,7 @@
   "dependencies": {
     "axios": "^0.12.0",
     "bluebird": "^3.4.1",
+    "object-assign": "^4.1.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",

@@ -9,8 +9,10 @@ interface Props {
 export default class Counter extends React.Component<Props, {}> {
 
     render() {
+        const loading = (this.props.value.loadingCount === 0) ? <p></p> : <p>loading</p>;
         return (
             <div>
+                {loading}
                 <p>score: {this.props.value.num}</p>
                 <button onClick={() => this.props.actions.increment(3)}>Increment 3</button>
                 <button onClick={() => this.props.actions.decrement(2)}>Decrement 2</button>
