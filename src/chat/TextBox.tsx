@@ -2,7 +2,8 @@ import * as React from "react";
 import {DispatchActions} from "./Models";
 
 export interface Props {
-    actions: DispatchActions
+    actions: DispatchActions;
+    ws: WebSocket;
 }
 
 interface State {
@@ -20,7 +21,7 @@ export default class TextBox extends React.Component<Props, State> {
 
     public createNewOne(): void {
         if (this.state.text.trim() === '') return;
-        this.props.actions.sendMessage(this.state.text);
+        this.props.actions.sendMessage(this.state.text, this.props.ws);
         this.setState({text: ""});
     };
 
@@ -37,7 +38,7 @@ export default class TextBox extends React.Component<Props, State> {
             <button
                 onClick={this.createNewOne.bind(this)}
                 children="send"
-                />
+            />
         </div>
     }
 }

@@ -1,66 +1,31 @@
 import React = require('react');
-import {connect} from "react-redux";
-import {DispatchActions, ChatState, ChatMessage, JsonObject} from "./Models";
-import {Dispatch} from "redux";
+import {DispatchActions, ChatState} from "./Models";
 import MessageList from "./MessageList";
-import {receiveMessage} from "./ActionCreators";
 import TextBox from "./TextBox";
 
 interface Props {
-    state?: ChatState;
-    dispatch?: Dispatch;
+    state: ChatState;
+    actions: DispatchActions;
 }
 
-export class ChatRoot extends React.Component<Props, {}> {
-
-    private ws: WebSocket;
+export default class ChatRoot extends React.Component<Props, {}> {
 
     componentDidMount(){
-        if (WebSocket == undefined) {
-            alert('This browser is not support WebSocket.');
-            return
-        }
-        //FIXME: set your IP for external IP access.
-        this.ws = new WebSocket("ws://localhost:3000/chat");
-
-        this.ws.onopen = ((e: Event) => {
-            console.log("connected");
-        });
-
-        this.ws.onmessage = ((e: MessageEvent) => {
-            const json: JsonObject = JSON.parse(e.data);
-            console.log(json);
-            const msg: ChatMessage = new ChatMessage(json.id, json.user, json.message);
-            this.props.dispatch(receiveMessage(msg))
-        });
-
-        this.ws.onclose = ((e: CloseEvent) => {
-            console.log("disconnected");
-        });
+        this.props.actions.createWS("myName");
     }
 
     componentWillUnmount(){
-        this.ws.close()
+        this.props.actions.closeWS(this.props.state.ws);
     }
 
     render() {
-        const actions = new DispatchActions(this.ws, this.props.dispatch);
+        const textBox = this.props.state.ws ? <TextBox actions={this.props.actions} ws={this.props.state.ws} /> : <p>WS connecting</p>
         return (
             <div>
                 <h2>Chat</h2>
-                <TextBox actions={actions}/>
-                <MessageList messages={this.props.state.messages}/>
+                {textBox}
+                <MessageList messages={this.props.state.messages} />
             </div>
         )
     }
 }
-
-
-function mapStateToProps(state: any):any {
-    return {
-        state: state.chat
-    };
-}
-
-const chatRoot = connect(mapStateToProps)(ChatRoot);
-export default chatRoot

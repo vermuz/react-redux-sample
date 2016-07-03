@@ -3,8 +3,8 @@ import * as ReactDOM from "react-dom";
 import {Router, Route, browserHistory} from "react-router";
 import Root from "./Root";
 import NotFound from "./NotFound";
-import ChatRoot from "./chat/ChatRoot";
-import TodoListRoot from "./todo/TodoListRoot";
+import chatRoot from "./chat/Root";
+import todoRoot from "./todo/Root";
 import counterRoot from "./counter/Root";
 import {Provider} from "react-redux";
 import store from "./Store";
@@ -14,8 +14,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path='/' component={Root} >
-                <Route path={Paths.TODO} component={TodoListRoot} />
-                <Route path={Paths.CHAT} component={ChatRoot} />
+                <Route path={Paths.TODO} component={todoRoot} />
+                <Route path={Paths.CHAT} component={chatRoot} />
                 <Route path={Paths.COUNTER} component={counterRoot} />
                 <Route path="*" component={NotFound} />
             </Route>

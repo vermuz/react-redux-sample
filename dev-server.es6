@@ -12,31 +12,38 @@ var port = 3000;
 var connections = [];
 var userID = 1;
 
-function broadcast(user, message) {
+function broadcast(message) {
   connections.forEach((con) => {
-    const id = Math.floor( Math.random() * 10000 );//generate random number 1 ~ 10000
-    const json = {id: id, user: user, message: message};
-    con.ws.send(JSON.stringify(json));
+    con.ws.send(message);
   });
 }
 
 wss.on('connection', function connection(ws) {
 
+  const name = ws.upgradeReq.url.substring(11);
   userID = userID + 1;
-  const user = userID;
+  const user = userID + "_" + decodeURIComponent(name);
+
+  console.log("user: " + user + ', joined');
   connections.push({user: user, ws: ws});
 
   ws.on('close', function () {
     connections = connections.filter(con => con.ws !== ws);
-    broadcast(user, "exited!")
+    const id = Math.floor( Math.random() * 10000 );//generate random number 1 ~ 10000
+    const json = {id: id, user: user, message: "exited!"};
+    broadcast(JSON.stringify(json))
   });
 
-  ws.on('message', function (message) {
-    console.log("user: " + user +  ', message: ', message);
-    broadcast(user, message)
+  ws.on('message', message => {
+    console.log("user: " + user + ', message: ', message);
+    const id = Math.floor( Math.random() * 10000 );//generate random number 1 ~ 10000
+    const json = {id: id, user: user, message: message};
+    broadcast(JSON.stringify(json))
   });
 
-  broadcast(user, "joined!")
+  const id = Math.floor( Math.random() * 10000 );//generate random number 1 ~ 10000
+  const json = {id: id, user: user, message: "joined!"};
+  broadcast(JSON.stringify(json))
 });
 
 app.use('/dist', express.static('dist'));

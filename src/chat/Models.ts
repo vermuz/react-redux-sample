@@ -1,8 +1,9 @@
-import {receiveMessage, sendMessage} from "./ActionCreators";
+import {sendMessage, createWS, closeWS} from "./ActionCreators";
 import {List} from "immutable";
 
 export interface ChatState {
     messages: List<ChatMessage>;
+    ws?: WebSocket;
 }
 
 export interface JsonObject {
@@ -18,25 +19,28 @@ export class ChatMessage implements JsonObject{
 export interface MyAction {
     type: string;
     message?: ChatMessage;
+    ws?: WebSocket;
 }
 
 export class DispatchActions {
-    constructor(
-        private ws: WebSocket,
-        private dispatch: (action: any) => any){
-        this.dispatch = dispatch
+    constructor(private dispatch: (action: any) => any){
     }
 
-    public sendMessage(msg: string) {
-        this.dispatch(sendMessage(this.ws, msg))
+    public createWS(name: string) {
+        this.dispatch(createWS(name))
     }
 
-    public receiveMessage(data: any) {
-        this.dispatch(receiveMessage(data))
+    public closeWS(ws: WebSocket) {
+        this.dispatch(closeWS(ws))
+    }
+
+    public sendMessage(msg: string, ws: WebSocket) {
+        this.dispatch(sendMessage(ws, msg))
     }
 }
 
 export class ActionTypes{
-    static SEND_MESSAGE = 'COUNTER_INCREMENT';
-    static RECEIVE_MESSAGE = 'COUNTER_DECREMENT';
+    static CREATE_WEBSOCKET = 'CHAT_CREATE_WEBSOCKET';
+    static SEND_MESSAGE = 'CHAT_COUNTER_INCREMENT';
+    static RECEIVE_MESSAGE = 'CHAT_COUNTER_DECREMENT';
 }
