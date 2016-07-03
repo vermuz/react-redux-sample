@@ -12,7 +12,7 @@ describe('Async test', () => {
         //use mock server.
         
         nock('http://localhost/')
-            .get('/json/sample.json')
+            .get('/api/count')
             .reply(200, { amount: 100 });
 
         const middlewares = [thunk];
@@ -23,7 +23,7 @@ describe('Async test', () => {
         store.dispatch(fetchAmountAction()).then(() => {
             const actions = store.getActions();
             assert.deepEqual(actions[0], { type: ActionTypes.FETCH_REQUEST });
-            assert.deepEqual(actions[1], { type: ActionTypes.INCREMENT, amount: 100 });
+            assert.deepEqual(actions[1], { type: ActionTypes.FETCH_SUCCESS, amount: 100 });
             done();
         }).catch(done);
     });
@@ -39,7 +39,7 @@ describe('Async test', () => {
         store.dispatch(fetchAmountAction()).then(() => {
             const actions = store.getActions();
             assert.deepEqual(actions[0], { type: ActionTypes.FETCH_REQUEST });
-            assert.deepEqual(actions[1], { type: ActionTypes.FETCH_FAIL});
+            assert.deepEqual(actions[1].type, ActionTypes.FETCH_FAIL);
             done();
         }).catch(done);
     });
