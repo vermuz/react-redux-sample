@@ -3,12 +3,10 @@ import {todoReduce} from "./todo/Reducer";
 import {createStore, applyMiddleware, combineReducers} from "redux";
 import thunk from "redux-thunk";
 
-const store = createStore(
+export default createStore(
     combineReducers({
         counter,
         todoReduce
     }),
     applyMiddleware(thunk)
 );
-
-export default store
