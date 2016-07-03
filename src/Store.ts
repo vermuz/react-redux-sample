@@ -4,7 +4,7 @@ import {createStore, applyMiddleware, combineReducers} from "redux";
 import thunk from "redux-thunk";
 import {chat} from "./chat/Reducer";
 
-const store = createStore(
+export default createStore(
     combineReducers({
         counter,
         todoReduce,
@@ -12,5 +12,3 @@ const store = createStore(
     }),
     applyMiddleware(thunk)
 );
-
-export default store
