@@ -19,7 +19,7 @@ describe('reducer test', () => {
         assert.deepEqual(result.loadingCount, state.loadingCount);
     });
 
-    it('DECREMENT', () => {
+    it('FETCH_SUCCESS', () => {
         const state: GlobalState = {num: -2, loadingCount:1};
         const action: MyAction = { type: ActionTypes.FETCH_SUCCESS, amount: 10};
         const result = counter(state, action);
