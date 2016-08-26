@@ -8,14 +8,22 @@
     "build:prod": "webpack --config ./webpack.config.prod.js",
     "server": "node dev-server.es6",
     "test:ts": "mocha --require ts-node/register \"./**/__test__/**/*.ts\"",
-    "test:tsx": "mocha --require ts-node/register ./test-setup.es6 \"./**/__test__/**/*.tsx\""
+    "test:tsx": "mocha --require ts-node/register ./test-setup.es6 \"./**/__test__/**/*.tsx\"",
+    "test:karma": "karma start"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "es6-promise": "^3.2.1",
     "express": "^4.14.0",
     "jsdom": "^9.2.1",
+    "json-loader": "^0.5.4",
+    "karma": "^1.2.0",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-webpack": "^1.8.0",
     "mocha": "^2.5.3",
     "nock": "^8.0.0",
+    "power-assert": "^1.4.1",
     "react-addons-test-utils": "^15.1.0",
     "redux-mock-store": "^1.1.1",
     "sinon": "^1.17.4",
@@ -27,6 +35,8 @@
   },
   "dependencies": {
     "axios": "^0.12.0",
+    "jquery": "^3.1.0",
+    "materialize-css": "^0.97.7",
     "object-assign": "^4.1.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
