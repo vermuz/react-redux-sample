@@ -15,8 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/es6-promise/dist/es6-promise.min.js',
+      'node_modules/jquery/dist/jquery.min.js',
       'node_modules/materialize-css/dist/js/materialize.min.js',
       '**/__test__/*.ts*'
     ],
@@ -32,7 +31,7 @@ module.exports = function(config) {
     preprocessors: {
       '**/__test__/*.ts*': ['webpack']
     },
-          
+
 
     webpack: require(__dirname + '/webpack.config.karma.js'),
 
