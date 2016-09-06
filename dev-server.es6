@@ -7,7 +7,7 @@ app.use('/dist', express.static('dist'));
 app.get('/api/count', (req, res) => {
   res.contentType('application/json');
   const obj = {"amount": 100};
-  res.json(obj);
+  setTimeout(() => res.json(obj), 500)
 });
 
 app.get('/', (req, res) => {
