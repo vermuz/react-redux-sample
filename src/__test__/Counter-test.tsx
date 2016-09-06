@@ -1,5 +1,5 @@
 import * as React from "react";
-import Counter from "../Counter";
+import {Counter} from "../Counter";
 import {GlobalState} from "../Models";
 import * as TestUtils from "react-addons-test-utils";
 import * as ReactDOM from "react-dom";

@@ -1,12 +1,13 @@
 import * as React from "react";
-import {GlobalState, DispatchActions} from "./Models";
+import {GlobalState} from "./Models";
+import {DispatchActions} from "./DispatchActions";
 
 interface Props {
     value: GlobalState;
     actions: DispatchActions;
 }
 
-export default class Counter extends React.Component<Props, {}> {
+export class Counter extends React.Component<Props, {}> {
 
     render() {
         const loading = (this.props.value.loadingCount === 0) ? <p></p> : <p>loading</p>;

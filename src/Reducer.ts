@@ -1,9 +1,9 @@
-import {GlobalState, MyAction, ActionTypes} from "./Models";
+import {GlobalState, ActionTypes} from "./Models";
 import objectAssign = require('object-assign');
 
 const initialState:GlobalState = {num: 0, loadingCount: 0};
 
-export function counter(state: GlobalState = initialState, action: MyAction): GlobalState {
+export function counter(state: GlobalState = initialState, action: any): GlobalState {
     //console.log(action.type); //check which action has occurred;
     //console.log(state);
     switch (action.type) {

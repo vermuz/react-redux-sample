@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Counter from "./Counter";
+import {Counter} from "./Counter";
 import store from "./Store";
-import {DispatchActions} from "./Models";
+import {DispatchActions} from "./DispatchActions";
 
 function render() {
     ReactDOM.render(
