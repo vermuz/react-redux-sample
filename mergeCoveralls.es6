@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 let coveralls = require('coveralls');
-// let scoverageJson = require('../../target/scala-2.10/coveralls.json');
+// let coverageJson = require('../../target/scala-2.10/coveralls.json');
 // let jsBasePath = "web-console/front/src"
-let jsBasePath = "";
 
 console.log("start");
 
@@ -28,13 +27,12 @@ function handleInput(input, cb, userOptions) {
       }
 
       let files1 = postData.source_files
-        .filter( v => v.name.indexOf("__test__") === -1) //testを取り除く
         .map( v => {
-          v.name = v.name.replace( /src/g , jsBasePath); //プロジェクトルートからの相対パスに直す
+          // v.name = v.name.replace( /src/g , jsBasePath); //プロジェクトルートからの相対パスに直す
           return v;
         });
       console.log(files1);
-      // let files2 = scoverageJson.source_files;
+      // let files2 = coverageJson.source_files;
       // console.log(JSON.stringify(otherJson));
       Array.prototype.push.apply(files1/*, files2*/);
       postData.source_files = files1;

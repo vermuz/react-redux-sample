@@ -19,6 +19,8 @@ module.exports = function(config) {
     files: files,
 
     preprocessors: {
+      '**/*-test.ts': ['webpack'],
+      '**/*-test.tsx': ['webpack'],
       '**/*-test.js': ['webpack']
     },
 
@@ -27,8 +29,10 @@ module.exports = function(config) {
         extensions: ['', '.ts', '.js', ".tsx"]
       },
       module: {
-        loaders: [
-        ],
+        loaders: [{
+          test: /\.tsx?$/,
+          loader: "ts-loader"
+        }],
         postLoaders: [{
           test: /\.js/,
           exclude: /(__test__|node_modules|bower_components)/,
