@@ -19,7 +19,6 @@ module.exports = function(config) {
     files: files,
 
     preprocessors: {
-      '**/*-test.js': ['webpack', 'coverage'],
       '**/*-test.ts': ['webpack'],
       '**/*-test.tsx': ['webpack']
     },
@@ -31,7 +30,12 @@ module.exports = function(config) {
       module: {
         loaders: [
           { test: /\.tsx?$/, loader: "ts-loader" }
-        ]
+        ],
+        postLoaders: [{
+          test: /\.tsx?$/,
+          exclude: /(__test__|node_modules|bower_components)/,
+          loader: 'istanbul-instrumenter'
+        }]
       }
     },
 
