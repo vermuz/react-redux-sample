@@ -9,7 +9,8 @@
     "server": "node dev-server.es6",
     "test:ts": "mocha --require ts-node/register \"./**/__test__/**/*.ts\"",
     "test:tsx": "mocha --require ts-node/register ./test-setup.es6 \"./**/__test__/**/*.tsx\"",
-    "test:karma": "karma start"
+    "test:karma-ut": "karma start karma.conf.js",
+    "test:karma-all": "karma start karma.conf.js **/*-test.tsx **/*-test.ts"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.6.1",
