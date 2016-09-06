@@ -19,6 +19,7 @@ module.exports = function(config) {
     files: files,
 
     preprocessors: {
+      '**/*-test.js': ['webpack', 'coverage'],
       '**/*-test.ts': ['webpack'],
       '**/*-test.tsx': ['webpack']
     },
@@ -28,7 +29,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
 
     // web server port
     port: 9876,
@@ -51,6 +52,11 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    coverageReporter: {
+      type : 'lcov',
+      dir : 'coverage-lcov/'
+    }
   })
 };

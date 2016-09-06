@@ -10,7 +10,9 @@
     "test:ts": "mocha --require ts-node/register \"./**/__test__/**/*.ts\"",
     "test:tsx": "mocha --require ts-node/register ./test-setup.es6 \"./**/__test__/**/*.tsx\"",
     "test:karma-ut": "karma start karma.conf.js",
-    "test:karma-all": "karma start karma.conf.js **/*-test.tsx **/*-test.ts"
+    "test:karma-all": "karma start karma.conf.js **/*-test.tsx **/*-test.ts",
+    "tsc": "tsc",
+    "test:karma-jsAll": "karma start karma.conf.js ./dist/**/*-test.js"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.6.1",
@@ -19,6 +21,7 @@
     "jsdom": "^9.2.1",
     "karma": "^1.2.0",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.0.2",
     "karma-mocha": "^1.1.1",
     "karma-mocha-reporter": "^2.1.0",
