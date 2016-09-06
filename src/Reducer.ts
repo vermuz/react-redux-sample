@@ -1,4 +1,4 @@
-import {GlobalState, ActionTypes} from "./Models";
+import {GlobalState, ActionTypes} from "./Entities";
 import objectAssign = require('object-assign');
 
 const initialState:GlobalState = {num: 0, loadingCount: 0};

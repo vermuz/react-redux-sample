@@ -1,5 +1,5 @@
 import {counter} from "../Reducer";
-import {GlobalState, ActionTypes} from "../Models";
+import {GlobalState, ActionTypes} from "../Entities";
 import {assert} from "chai";
 
 describe('Reducer', () => {

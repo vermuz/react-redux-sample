@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import {ActionTypes, JsonObject} from "./Models";
+import {ActionTypes, JsonObject} from "./Entities";
 
 export class DispatchActions {
     private dispatch: (action: any) => any;

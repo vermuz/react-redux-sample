@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Counter} from "../Counter";
-import {GlobalState} from "../Models";
+import {GlobalState} from "../Entities";
 import * as TestUtils from "react-addons-test-utils";
 import * as ReactDOM from "react-dom";
 import {assert} from "chai";

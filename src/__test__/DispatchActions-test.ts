@@ -1,4 +1,4 @@
-import {ActionTypes} from "../Models";
+import {ActionTypes} from "../Entities";
 import {DispatchActions} from "../DispatchActions";
 import {assert} from "chai";
 import {spy} from "sinon";

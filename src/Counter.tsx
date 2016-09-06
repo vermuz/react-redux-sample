@@ -1,5 +1,5 @@
 import * as React from "react";
-import {GlobalState} from "./Models";
+import {GlobalState} from "./Entities";
 import {DispatchActions} from "./DispatchActions";
 
 interface Props {
