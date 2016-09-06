@@ -17,7 +17,8 @@ module.exports = function(config) {
     files: [
       'node_modules/jquery/dist/jquery.min.js',
       'node_modules/materialize-css/dist/js/materialize.min.js',
-      '**/__test__/*.ts*'
+      '**/*-test.ts',
+      '**/*-test.tsx'
     ],
 
 
@@ -39,7 +40,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['mocha'],
 
 
     // web server port
