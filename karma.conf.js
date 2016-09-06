@@ -24,7 +24,16 @@ module.exports = function(config) {
       '**/*-test.tsx': ['webpack']
     },
 
-    webpack: require(__dirname + '/webpack.config.karma.js'),
+    webpack: {
+      resolve: {
+        extensions: ['', '.ts', '.js', ".tsx"]
+      },
+      module: {
+        loaders: [
+          { test: /\.tsx?$/, loader: "ts-loader" }
+        ]
+      }
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
