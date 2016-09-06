@@ -19,8 +19,7 @@ module.exports = function(config) {
     files: files,
 
     preprocessors: {
-      '**/*-test.ts': ['webpack'],
-      '**/*-test.tsx': ['webpack']
+      '**/*-test.js': ['webpack']
     },
 
     webpack: {
@@ -29,10 +28,9 @@ module.exports = function(config) {
       },
       module: {
         loaders: [
-          { test: /\.tsx?$/, loader: "ts-loader" }
         ],
         postLoaders: [{
-          test: /\.tsx?$/,
+          test: /\.js/,
           exclude: /(__test__|node_modules|bower_components)/,
           loader: 'istanbul-instrumenter'
         }]
@@ -68,8 +66,8 @@ module.exports = function(config) {
     concurrency: Infinity,
 
     coverageReporter: {
-      type : 'lcov',
-      dir : 'coverage-lcov/'
+      type : 'json',
+      dir : 'coverage/'
     }
   })
 };
