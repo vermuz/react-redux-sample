@@ -1,5 +1,7 @@
 import {ActionTypes} from "../Models";
 import {DispatchActions} from "../DispatchActions";
+import {assert} from "chai";
+import {spy} from "sinon";
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
 
@@ -16,35 +18,32 @@ describe('DispatchActions', () => {
     });
 
     it('increment',  () => {
-        const spy:any = {dispatch: null};
-        spyOn(spy, 'dispatch');
-        const actions = new DispatchActions(spy.dispatch);
+        const spyCB:any = spy();
+        const actions = new DispatchActions(spyCB);
         actions.increment(100);
-        expect(spy.dispatch).toHaveBeenCalledWith({ type: ActionTypes.INCREMENT, amount: 100});
+        assert(spyCB.calledOnce);
+        assert(spyCB.calledWith({ type: ActionTypes.INCREMENT, amount: 100 }));
     });
 
     it('fetchAmount success',  () => {
 
         mock.onGet('/api/count').reply(200, { amount: 100 });
-
-        const spy:any = {dispatch: null};
-        spyOn(spy, 'dispatch');
-        const actions = new DispatchActions(spy.dispatch);
+        const spyCB:any = spy();
+        const actions = new DispatchActions(spyCB);
         return actions.fetchAmount().then(() => {
-            expect(spy.dispatch.calls.argsFor(0)).toEqual({ type: ActionTypes.FETCH_REQUEST });
-            expect(spy.dispatch.calls.argsFor(1)).toEqual({ type: ActionTypes.FETCH_SUCCESS, amount: 100 });
+            assert.deepEqual(spyCB.getCall(0).args[0], { type: ActionTypes.FETCH_REQUEST });
+            assert.deepEqual(spyCB.getCall(1).args[0], { type: ActionTypes.FETCH_SUCCESS, amount: 100 });
         });
     });
 
     it('fetchAmount fail',  () => {
         mock.onGet('/api/count').reply(400, {});
 
-        const spy:any = {dispatch: null};
-        spyOn(spy, 'dispatch');
-        const actions = new DispatchActions(spy.dispatch);
+        const spyCB:any = spy();
+        const actions = new DispatchActions(spyCB);
         return actions.fetchAmount().then(() => {
-            expect(spy.dispatch.calls.argsFor(0)).toEqual({ type: ActionTypes.FETCH_REQUEST });
-            expect(spy.dispatch.calls.argsFor(1)).toEqual({ type: ActionTypes.FETCH_FAIL });
+            assert.deepEqual(spyCB.getCall(0).args[0], { type: ActionTypes.FETCH_REQUEST });
+            assert.deepEqual(spyCB.getCall(1).args[0], { type: ActionTypes.FETCH_FAIL });
         });
     });
 });

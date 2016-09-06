@@ -27,6 +27,7 @@ function handleInput(input, cb, userOptions) {
       }
 
       let files1 = postData.source_files
+        .filter( v => v.name.indexOf("__test__") === -1) //testを取り除く
         .map( v => {
           // v.name = v.name.replace( /src/g , jsBasePath); //プロジェクトルートからの相対パスに直す
           return v;

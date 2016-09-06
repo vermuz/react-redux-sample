@@ -17,7 +17,7 @@ export class DispatchActions {
 
     public fetchAmount(): Axios.IPromise<any> {
         const failCB = (err:Error) => {
-            console.error(err);
+            //console.error(err);
             this.dispatch({ type: ActionTypes.FETCH_FAIL})
         };
 
