@@ -16,8 +16,9 @@ export class DispatchActions {
     }
 
     public fetchAmount(): Axios.IPromise<any> {
-        const failCB = (ex:Error) => {
-            this.dispatch({ type: ActionTypes.FETCH_FAIL, error: ex})
+        const failCB = (err:Error) => {
+            console.error(err);
+            this.dispatch({ type: ActionTypes.FETCH_FAIL})
         };
 
         const successCB = (json:Axios.AxiosXHR<JsonObject>) => {

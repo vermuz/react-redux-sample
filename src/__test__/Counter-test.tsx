@@ -4,9 +4,9 @@ import {GlobalState} from "../Models";
 import * as TestUtils from "react-addons-test-utils";
 import * as ReactDOM from "react-dom";
 
-describe('Counter test', () => {
+describe('Counter', () => {
 
-    it('rendering test', () => {
+    it('rendering', () => {
         const actions:any = {};
         const state: GlobalState = {num: 1, loadingCount: 1};
         const counterComponent: any = TestUtils.renderIntoDocument(

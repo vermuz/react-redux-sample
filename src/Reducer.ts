@@ -25,7 +25,6 @@ export function counter(state: GlobalState = initialState, action: any): GlobalS
             return objectAssign({}, state, {num: newNum, loadingCount: newCount});
         }
         case ActionTypes.FETCH_FAIL:{
-            console.error(action.error);
             const newCount = state.loadingCount - 1;
             return objectAssign({}, state, {loadingCount: newCount});
         }

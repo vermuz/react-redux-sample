@@ -1,7 +1,7 @@
 import {counter} from "../Reducer";
 import {GlobalState, ActionTypes} from "../Models";
 
-describe('reducer test', () => {
+describe('Reducer', () => {
     it('INCREMENT', () => {
         const state: GlobalState = {num: 4, loadingCount:0};
         const action = { type: ActionTypes.INCREMENT, amount: 3};
