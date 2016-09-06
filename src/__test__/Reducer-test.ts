@@ -1,4 +1,3 @@
-import {assert} from "chai";
 import {counter} from "../Reducer";
 import {GlobalState, MyAction, ActionTypes} from "../Models";
 
@@ -7,23 +6,23 @@ describe('reducer test', () => {
         const state: GlobalState = {num: 4, loadingCount:0};
         const action: MyAction = { type: ActionTypes.INCREMENT, amount: 3};
         const result = counter(state, action);
-        assert.deepEqual(result.num, state.num + 3);
-        assert.deepEqual(result.loadingCount, state.loadingCount);
+        expect(result.num).toBe(state.num + 3);
+        expect(result.loadingCount).toBe(state.loadingCount);
     });
 
     it('DECREMENT', () => {
         const state: GlobalState = {num: -2, loadingCount:0};
         const action: MyAction = { type: ActionTypes.DECREMENT, amount: 10};
         const result = counter(state, action);
-        assert.deepEqual(result.num, state.num - 10);
-        assert.deepEqual(result.loadingCount, state.loadingCount);
+        expect(result.num).toBe(state.num - 10);
+        expect(result.loadingCount).toBe(state.loadingCount);
     });
 
     it('FETCH_SUCCESS', () => {
         const state: GlobalState = {num: -2, loadingCount:1};
         const action: MyAction = { type: ActionTypes.FETCH_SUCCESS, amount: 10};
         const result = counter(state, action);
-        assert.deepEqual(result.num, state.num + 10);
-        assert.deepEqual(result.loadingCount, state.loadingCount -1);
+        expect(result.num).toBe(state.num + 10);
+        expect(result.loadingCount).toBe(state.loadingCount - 1);
     });
 });
