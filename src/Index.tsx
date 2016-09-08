@@ -1,15 +1,19 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Counter from "./Counter";
+import {Counter} from "./Counter";
 import store from "./Store";
-import {DispatchActions} from "./Models";
+import {DispatchActions} from "./DispatchActions";
+import {Provider, connect} from "react-redux";
+import {Dispatch} from "redux";
 
-function render() {
-    ReactDOM.render(
-        <Counter value={store.getState()} actions={new DispatchActions(store.dispatch)} />,
-        document.getElementById('app')
-    )
-}
+const CounterComponent = connect(
+    (store: any) => {return {value: store.counter}},
+    (dispatch: Dispatch<any>) => {return {actions: new DispatchActions(dispatch)}}
+)(Counter);
 
-render();
-store.subscribe(render);
+ReactDOM.render(
+    <Provider store={store}>
+        <CounterComponent />
+    </Provider>
+    , document.getElementById('app')
+);
