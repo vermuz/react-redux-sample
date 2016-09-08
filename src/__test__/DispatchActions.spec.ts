@@ -5,7 +5,6 @@ const mock = require('superagent-mocker')(request);
 
 describe('DispatchActions', () => {
 
-
     beforeEach(() => {
         mock.clearRoutes()
     });
@@ -19,7 +18,6 @@ describe('DispatchActions', () => {
     });
 
     it('fetchAmount success',  (done) => {
-
         mock.get('/api/count', () => ({body: {amount: 100}, status: 200}));
 
         const spy:any = {dispatch: null};
