@@ -6,7 +6,9 @@
     "server": "node dev-server.es6",
     "postinstall": "typings install",
     "build": "webpack --progress --colors --watch --config ./webpack.config.dev.js",
-    "build:prod": "webpack --config ./webpack.config.prod.js"
+    "build:prod": "webpack --config ./webpack.config.prod.js",
+    "test:karma-ut": "karma start karma.conf.js",
+    "test:karma-all": "karma start karma.conf.js **/*.spec.tsx **/*.spec.ts"
   },
   "devDependencies": {
     "express": "^4.14.0",
