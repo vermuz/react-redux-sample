@@ -2,51 +2,55 @@ const args = process.argv;
 args.splice(0, 4);
 
 const polyfills = [
-    'node_modules/es6-promise/dist/es6-promise.js'
+  'node_modules/es6-promise/dist/es6-promise.js'
 ];
 
 var files = polyfills.concat(args);
 
-module.exports = function(config) {
-    config.set({
+module.exports = function (config) {
+  config.set({
 
-        basePath: '',
+    basePath: '',
 
-        frameworks: ['jasmine'],
+    frameworks: ['jasmine'],
 
-        files: files,
+    files: files,
 
-        preprocessors: {
-            '**/*.spec.ts': ['webpack'],
-            '**/*.spec.tsx': ['webpack']
-        },
+    preprocessors: {
+      '**/*.spec.ts': ['webpack'],
+      '**/*.spec.tsx': ['webpack']
+    },
 
-        webpack: {
-            resolve: {
-                extensions: ['', '.ts', '.js', ".tsx"]
-            },
-            module: {
-                loaders: [{
-                    test: /\.tsx?$/,
-                    loader: "ts-loader"
-                }]
-            }
-        },
+    webpack: {
+      resolve: {
+        extensions: ['.ts', '.js', ".tsx"]
+      },
+      module: {
+        rules: [
+          {
+            test: /\.tsx?$/,
+            use: [
+              {loader: "ts-loader"}
+            ]
+          }
+        ]
+      }
+    },
 
-        reporters: ['mocha'],
+    reporters: ['mocha'],
 
-        port: 9876,
+    port: 9876,
 
-        colors: true,
+    colors: true,
 
-        logLevel: config.LOG_INFO,
+    logLevel: config.LOG_INFO,
 
-        autoWatch: false,
+    autoWatch: false,
 
-        browsers: ['Chrome'],
+    browsers: ['Chrome'],
 
-        singleRun: true,
+    singleRun: true,
 
-        concurrency: Infinity
-    })
+    concurrency: Infinity
+  })
 };

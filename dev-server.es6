@@ -8,6 +8,7 @@ app.get('/api/count', (req, res) => {
   res.contentType('application/json');
   const obj = {"amount": 100};
   setTimeout(() => res.json(obj), 500);
+  //res.status(400).json(obj); //for error testing
 });
 
 app.get('/', (req, res) => {
