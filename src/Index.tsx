@@ -1,3 +1,6 @@
+//polyfills
+import 'core-js'
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Counter} from "./Counter";
