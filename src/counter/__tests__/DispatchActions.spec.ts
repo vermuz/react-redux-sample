@@ -1,6 +1,5 @@
-import {ActionTypes} from "../Entities";
-import {DispatchActions} from "../DispatchActions";
 import fetchMock from 'fetch-mock';
+import {ActionTypes, ActionDispatcher} from "../module";
 
 
 describe('DispatchActions', () => {
@@ -12,7 +11,7 @@ describe('DispatchActions', () => {
   it('increment', () => {
     const spy: any = {dispatch: null};
     spyOn(spy, 'dispatch');
-    const actions = new DispatchActions(spy.dispatch);
+    const actions = new ActionDispatcher(spy.dispatch);
     actions.increment(100);
     expect(spy.dispatch).toHaveBeenCalledWith({type: ActionTypes.INCREMENT, amount: 100});
   });
@@ -22,7 +21,7 @@ describe('DispatchActions', () => {
 
     const spy: any = {dispatch: null};
     spyOn(spy, 'dispatch');
-    const actions = new DispatchActions(spy.dispatch);
+    const actions = new ActionDispatcher(spy.dispatch);
     actions.fetchAmount().then(() => {
       expect(spy.dispatch.calls.argsFor(0)[0]).toEqual({type: ActionTypes.FETCH_REQUEST});
       expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.FETCH_SUCCESS, amount: 100});
@@ -35,7 +34,7 @@ describe('DispatchActions', () => {
 
     const spy: any = {dispatch: null};
     spyOn(spy, 'dispatch');
-    const actions = new DispatchActions(spy.dispatch);
+    const actions = new ActionDispatcher(spy.dispatch);
     actions.fetchAmount().then(() => {
       expect(spy.dispatch.calls.argsFor(0)[0]).toEqual({type: ActionTypes.FETCH_REQUEST});
       expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.FETCH_FAIL, error: 400});

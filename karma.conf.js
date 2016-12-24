@@ -1,9 +1,7 @@
 const args = process.argv;
 args.splice(0, 4);
 
-const polyfills = [
-  'node_modules/es6-promise/dist/es6-promise.js'
-];
+const polyfills = [];
 
 var files = polyfills.concat(args);
 
