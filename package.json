@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "server": "node dev-server.es6",
-    "build": "webpack --progress --colors --config ./webpack.config.dev.js",
+    "build": "webpack --colors --config ./webpack.config.dev.js",
     "build:prod": "webpack --config ./webpack.config.prod.js"
   },
   "devDependencies": {
