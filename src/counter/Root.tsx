@@ -11,7 +11,7 @@ export class Counter extends React.Component<Props, {}> {
 
   handleChangeFile(e: any) {
     const target: HTMLInputElement = e.target as HTMLInputElement;
-    const file = target.files.item(0);
+    const file: File = target.files.item(0);
     updateFile(this.props.dispatch, file);
   }
 
@@ -26,7 +26,7 @@ export class Counter extends React.Component<Props, {}> {
         <button onClick={() => fetchAmount(this.props.dispatch)}>async bonus 100</button>
 
         <h2>File upload</h2>
-        <input type="file" name="myFile" onChange={(e) => this.handleChangeFile(e)}/>
+        <input type="file" onChange={(e) => this.handleChangeFile(e)}/>
         <button onClick={() => uploadFile(this.props.dispatch, this.props.value.file)}>upload</button>
       </div>
     )

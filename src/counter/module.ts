@@ -87,8 +87,7 @@ export function uploadFile(dispatch: Dispatch<any>, file: File) {
     if(response.status === 200){ //2xx
       return response.json<any>().then((json) => {
         console.log(json);
-        const action = {type: FETCH_SUCCESS};
-        dispatch(action)
+        dispatch({type: FETCH_SUCCESS})
       });
     }else{
       dispatch({type: FETCH_FAIL, error: response.status})
