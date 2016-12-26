@@ -12,6 +12,7 @@ interface JsonObject {
 }
 
 export interface CounterState {
+  file?: File;
   num: number;
   loadingCount: number;
 }
@@ -19,11 +20,13 @@ export interface CounterState {
 interface MyAction {
   type: string;
   amount?: number;
+  file?: File;
   error?: Error;
 }
 
 const INCREMENT = 'counter/increment';
 const DECREMENT = 'counter/decrement';
+const UPDATE_FILE = 'counter/update_file';
 const FETCH_REQUEST = 'counter/fetch_request';
 const FETCH_SUCCESS = 'counter/fetch_success';
 const FETCH_FAIL = 'counter/fetch_fail';
@@ -40,14 +43,16 @@ export default function reducer(state: CounterState = initialState, action: MyAc
       const newNum = state.num - action.amount;
       return Object.assign({}, state, {num: newNum});
     }
+    case UPDATE_FILE: {
+      return Object.assign({}, state, {file: action.file});
+    }
     case FETCH_REQUEST: {
       const newCount = state.loadingCount + 1;
       return Object.assign({}, state, {loadingCount: newCount});
     }
     case FETCH_SUCCESS: {
-      const newNum = state.num + action.amount;
       const newCount = state.loadingCount - 1;
-      return Object.assign({}, state, {num: newNum, loadingCount: newCount});
+      return Object.assign({}, state, {loadingCount: newCount});
     }
     case FETCH_FAIL: {
       console.error(action.error);
@@ -67,6 +72,39 @@ export function decrement(dispatch: Dispatch<any>, amount: number) {
   dispatch({ type: DECREMENT, amount: amount})
 }
 
+export function updateFile(dispatch: Dispatch<any>, file: File) {
+  dispatch({ type: UPDATE_FILE, file: file})
+}
+
+export function uploadFile(dispatch: Dispatch<any>, file: File) {
+  const failCB = (err: Error) => {
+    console.error(err);
+    dispatch({type: FETCH_FAIL, error: err})
+  };
+
+  const successCB:(response: IResponse) => Promise<void> = (response) => {
+
+    if(response.status === 200){ //2xx
+      return response.json<any>().then((json) => {
+        console.log(json);
+        const action = {type: FETCH_SUCCESS};
+        dispatch(action)
+      });
+    }else{
+      dispatch({type: FETCH_FAIL, error: response.status})
+    }
+  };
+
+  dispatch({type: FETCH_REQUEST});
+
+  const formData = new FormData();
+  formData.append('myFile', file);
+
+  return fetch('/api/upload', {method: 'POST', body: formData})
+    .then(successCB)
+    .catch(failCB);
+}
+
 export function fetchAmount(dispatch: Dispatch<any>): Promise<void> {
   const failCB = (err: Error) => {
     console.error(err);
@@ -77,11 +115,11 @@ export function fetchAmount(dispatch: Dispatch<any>): Promise<void> {
 
     if(response.status === 200){ //2xx
       return response.json<JsonObject>().then((json) => {
-        const action = {type: FETCH_SUCCESS, amount: json.amount};
-        dispatch(action)
+        dispatch({type: FETCH_SUCCESS});
+        dispatch({type: INCREMENT, amount: json.amount});
       });
     }else{
-      dispatch({type: FETCH_FAIL, error: response.status})
+      dispatch({type: FETCH_FAIL, error: response.status});
     }
   };
 
