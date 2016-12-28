@@ -79,13 +79,13 @@ export class ActionDispatcher {
 
       if (response.status === 200) { //2xx
         const json = await response.json<JsonObject>();
-        this.dispatch({type: ActionTypes.FETCH_REQUEST_FINISH});
         this.dispatch({type: ActionTypes.INCREMENT, amount: json.amount})
       } else {
         throw new Error(`illegal status code: ${response.status}`);
       }
-    } catch(err/* :Error*/) {
+    } catch (err) {
       console.error(err);
+    } finally {
       this.dispatch({type: ActionTypes.FETCH_REQUEST_FINISH})
     }
   }
