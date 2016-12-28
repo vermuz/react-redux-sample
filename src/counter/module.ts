@@ -19,15 +19,13 @@ export interface CounterState {
 interface MyAction {
   type: string;
   amount?: number;
-  error?: Error;
 }
 
 export class ActionTypes{
   static INCREMENT = 'counter/increment';
   static DECREMENT = 'counter/decrement';
-  static FETCH_REQUEST = 'counter/fetch_request';
-  static FETCH_SUCCESS = 'counter/fetch_success';
-  static FETCH_FAIL = 'counter/fetch_fail';
+  static FETCH_REQUEST_START = 'counter/fetch_request_start';
+  static FETCH_REQUEST_FINISH = 'counter/fetch_request_finish';
 }
 
 const initialState:CounterState = {num: 0, loadingCount: 0};
@@ -42,17 +40,11 @@ export default function reducer(state: CounterState = initialState, action: MyAc
       const newNum = state.num - action.amount;
       return Object.assign({}, state, {num: newNum});
     }
-    case ActionTypes.FETCH_REQUEST: {
+    case ActionTypes.FETCH_REQUEST_START: {
       const newCount = state.loadingCount + 1;
       return Object.assign({}, state, {loadingCount: newCount});
     }
-    case ActionTypes.FETCH_SUCCESS: {
-      const newNum = state.num + action.amount;
-      const newCount = state.loadingCount - 1;
-      return Object.assign({}, state, {num: newNum, loadingCount: newCount});
-    }
-    case ActionTypes.FETCH_FAIL: {
-      console.error(action.error);
+    case ActionTypes.FETCH_REQUEST_FINISH: {
       const newCount = state.loadingCount - 1;
       return Object.assign({}, state, {loadingCount: newCount});
     }
@@ -76,28 +68,26 @@ export class ActionDispatcher {
     this.dispatch({type: ActionTypes.DECREMENT, amount: amount})
   }
 
-  public fetchAmount(): Promise<void> {
-    const failCB = (err: Error) => {
-      console.error(err);
-      this.dispatch({type: ActionTypes.FETCH_FAIL, error: err})
-    };
+  public async fetchAmount(): Promise<void> {
+    this.dispatch({type: ActionTypes.FETCH_REQUEST_START});
 
-    const successCB: (response: IResponse) => Promise<void> = (response) => {
+    try {
+      const response: IResponse = await fetch('/api/count', {
+        method: 'GET',
+        headers: myHeaders,
+        credentials: 'include'
+      });
 
       if (response.status === 200) { //2xx
-        return response.json<JsonObject>().then((json) => {
-          const action = {type: ActionTypes.FETCH_SUCCESS, amount: json.amount};
-          this.dispatch(action)
-        });
+        const json = await response.json<JsonObject>();
+        this.dispatch({type: ActionTypes.FETCH_REQUEST_FINISH});
+        this.dispatch({type: ActionTypes.INCREMENT, amount: json.amount})
       } else {
-        this.dispatch({type: ActionTypes.FETCH_FAIL, error: response.status})
+        throw new Error(`illegal status code: ${response.status}`);
       }
-    };
-
-    this.dispatch({type: ActionTypes.FETCH_REQUEST});
-
-    return fetch('/api/count', {method: 'GET', headers: myHeaders, credentials: 'include'})
-      .then(successCB)
-      .catch(failCB)
+    } catch(err/* :Error*/) {
+      console.error(err);
+      this.dispatch({type: ActionTypes.FETCH_REQUEST_FINISH})
+    }
   }
 }
