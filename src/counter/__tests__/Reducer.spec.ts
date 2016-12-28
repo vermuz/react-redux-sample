@@ -18,11 +18,10 @@ describe('Reducer', () => {
     expect(result.loadingCount).toBe(state.loadingCount);
   });
 
-  it('FETCH_SUCCESS', () => {
+  it('FETCH_REQUEST_FINISH', () => {
     const state: CounterState = {num: -2, loadingCount:1};
-    const action = { type: ActionTypes.FETCH_SUCCESS, amount: 10};
+    const action = { type: ActionTypes.FETCH_REQUEST_FINISH};
     const result = reducer(state, action);
-    expect(result.num).toBe(state.num + 10);
     expect(result.loadingCount).toBe(state.loadingCount - 1);
   });
 });

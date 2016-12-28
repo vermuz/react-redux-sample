@@ -16,29 +16,28 @@ describe('DispatchActions', () => {
     expect(spy.dispatch).toHaveBeenCalledWith({type: ActionTypes.INCREMENT, amount: 100});
   });
 
-  it('fetchAmount success', (done) => {
+  it('fetchAmount success', async (done) => {
     fetchMock.get('/api/count', {body: {amount: 100}, status: 200});
 
     const spy: any = {dispatch: null};
     spyOn(spy, 'dispatch');
     const actions = new ActionDispatcher(spy.dispatch);
-    actions.fetchAmount().then(() => {
-      expect(spy.dispatch.calls.argsFor(0)[0]).toEqual({type: ActionTypes.FETCH_REQUEST});
-      expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.FETCH_SUCCESS, amount: 100});
-      done();
-    });
+    await actions.fetchAmount();
+    expect(spy.dispatch.calls.argsFor(0)[0]).toEqual({type: ActionTypes.FETCH_REQUEST_START});
+    expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.FETCH_REQUEST_FINISH});
+    expect(spy.dispatch.calls.argsFor(2)[0]).toEqual({type: ActionTypes.INCREMENT, amount: 100});
+    done();
   });
 
-  it('fetchAmount fail', (done) => {
+  it('fetchAmount fail', async (done) => {
     fetchMock.get('/api/count', {body: {}, status: 400});
 
     const spy: any = {dispatch: null};
     spyOn(spy, 'dispatch');
     const actions = new ActionDispatcher(spy.dispatch);
-    actions.fetchAmount().then(() => {
-      expect(spy.dispatch.calls.argsFor(0)[0]).toEqual({type: ActionTypes.FETCH_REQUEST});
-      expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.FETCH_FAIL, error: 400});
-      done();
-    });
+    await actions.fetchAmount();
+    expect(spy.dispatch.calls.argsFor(0)[0]).toEqual({type: ActionTypes.FETCH_REQUEST_START});
+    expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.FETCH_REQUEST_FINISH});
+    done();
   });
 });

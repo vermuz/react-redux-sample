@@ -1,5 +1,4 @@
 import 'isomorphic-fetch';
-import {Dispatch} from "redux";
 
 export const myHeaders = new Headers({
   "Content-Type": "application/json",
