@@ -2,7 +2,7 @@ import fetchMock from 'fetch-mock';
 import {ActionTypes, ActionDispatcher} from "../module";
 
 
-describe('DispatchActions', () => {
+describe('ActionDispatcher', () => {
 
   beforeEach(() => {
     fetchMock.restore();
