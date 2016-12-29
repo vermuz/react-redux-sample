@@ -3,7 +3,7 @@ args.splice(0, 4);
 
 const polyfills = [];
 
-var files = polyfills.concat(args);
+const files = polyfills.concat(args);
 
 module.exports = function (config) {
   config.set({
@@ -36,19 +36,12 @@ module.exports = function (config) {
     },
 
     reporters: ['mocha'],
-
     port: 9876,
-
     colors: true,
-
     logLevel: config.LOG_INFO,
-
     autoWatch: false,
-
-    browsers: ['Chrome'],
-
+    browsers: ['Firefox'],
     singleRun: true,
-
     concurrency: Infinity
   })
 };

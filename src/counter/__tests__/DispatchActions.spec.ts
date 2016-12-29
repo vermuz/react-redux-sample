@@ -24,8 +24,8 @@ describe('DispatchActions', () => {
     const actions = new ActionDispatcher(spy.dispatch);
     await actions.fetchAmount();
     expect(spy.dispatch.calls.argsFor(0)[0]).toEqual({type: ActionTypes.FETCH_REQUEST_START});
-    expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.FETCH_REQUEST_FINISH});
-    expect(spy.dispatch.calls.argsFor(2)[0]).toEqual({type: ActionTypes.INCREMENT, amount: 100});
+    expect(spy.dispatch.calls.argsFor(1)[0]).toEqual({type: ActionTypes.INCREMENT, amount: 100});
+    expect(spy.dispatch.calls.argsFor(2)[0]).toEqual({type: ActionTypes.FETCH_REQUEST_FINISH});
     done();
   });
 
