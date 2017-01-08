@@ -1,15 +1,15 @@
-import * as React from "react";
-import {CounterState, ActionDispatcher} from "./module";
+import * as React from 'react'
+import {ActionDispatcher, ICounterState} from './module'
 
-interface Props {
-  value: CounterState;
-  actions: ActionDispatcher;
+interface IProps {
+  value: ICounterState
+  actions: ActionDispatcher
 }
 
-export class Counter extends React.Component<Props, {}> {
+export class Counter extends React.Component<IProps, {}> {
 
   render() {
-    const loading = (this.props.value.loadingCount === 0) ? null : <p>loading</p>;
+    const loading = (this.props.value.loadingCount === 0) ? null : <p>loading</p>
     return (
       <div>
         {loading}

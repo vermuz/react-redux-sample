@@ -7,7 +7,8 @@
     "build": "webpack --colors --config ./webpack.config.dev.js",
     "build:prod": "webpack --config ./webpack.config.prod.js",
     "test:ut": "karma start karma.conf.js",
-    "test:all": "karma start karma.conf.js **/*.spec.tsx **/*.spec.ts"
+    "test:all": "karma start karma.conf.js **/*.spec.tsx **/*.spec.ts",
+    "lint": "tslint -c tslint.json 'src/**/*.ts?(x)'"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.35",
@@ -30,6 +31,9 @@
     "karma-webpack": "^1.8.0",
     "react-addons-test-utils": "^15.4.1",
     "ts-loader": "^1.3.2",
+    "tslint": "^4.3.1",
+    "tslint-config-standard": "^2.0.0",
+    "tslint-react": "^2.2.0",
     "typescript": "^2.1.4",
     "webpack": "^2.2.0-rc.0"
   },
