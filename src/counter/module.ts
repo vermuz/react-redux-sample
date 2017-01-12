@@ -98,6 +98,7 @@ export function uploadFile(dispatch: Dispatch<any>, file: File) {
 
   const formData = new FormData();
   formData.append('myFile', file);
+  formData.append('myJson', JSON.stringify({foo: "fooVal", bar: "barVal"}));
 
   return fetch('/api/upload', {method: 'POST', body: formData})
     .then(successCB)

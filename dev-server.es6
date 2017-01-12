@@ -15,7 +15,10 @@ app.get('/api/count', (req, res) => {
   //res.status(400).json(obj); //for error testing
 });
 
-app.post('/api/upload', upload.fields([ { name: 'myFile' } ]), (req, res) => {
+app.post('/api/upload', upload.fields([ { name: 'myFile' }, {name: 'myJson'}]), (req, res) => {
+
+  const myJson = JSON.parse(req.body.myJson);
+  console.log(myJson);
 
   const myFile = req.files.myFile[0];
   const tmp_path = myFile.path;
