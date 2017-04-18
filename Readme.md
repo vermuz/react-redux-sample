@@ -1,6 +1,8 @@
 
 ## React-redux-sample
 
+[![CircleCI](https://circleci.com/gh/uryyyyyyy/react-redux-sample/tree/async.svg?style=svg)](https://circleci.com/gh/uryyyyyyy/react-redux-sample/tree/async)
+
 minimal sample implementation
 
 see document about it(Japanese)
@@ -10,6 +12,7 @@ see document about it(Japanese)
 ## requirement
 
 - NodeJS 8.1~
+- Chrome Browser (or fetch-API implemented browser)
 
 ## setup
 
@@ -17,13 +20,13 @@ see document about it(Japanese)
 
 ## build
 
-webpack watches update & re-build automatically
+bundle alljs using webpack
 
 `npm run build`
 
 ## run
 
-`python -m SimpleHTTPServer`
+`npm run server`
 
 ## License
 
