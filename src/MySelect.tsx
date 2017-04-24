@@ -5,11 +5,11 @@ export interface Props {
 }
 
 export interface State {
-  dataList: string;
+  selectedValue: string;
   domID: string;
 }
 
-export class Hello extends React.Component<Props, State> {
+export default class MySelect extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props)
