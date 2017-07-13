@@ -7,15 +7,11 @@ interface Props {
   actions: ActionDispatcher
 }
 
-export class Counter extends React.Component<Props, {}> {
-
-  render() {
-    return (
-      <div>
-        <p>score: {this.props.value.num}</p>
-        <button onClick={() => this.props.actions.increment(3)}>Increment 3</button>
-        <button onClick={() => this.props.actions.decrement(2)}>Decrement 2</button>
-      </div>
-    )
-  }
-}
+export const Counter: React.StatelessComponent<Props> =
+  (props: Props) => (
+    <div>
+      <p>score: {props.value.num}</p>
+      <button onClick={() => props.actions.increment(3)}>Increment 3</button>
+      <button onClick={() => props.actions.decrement(2)}>Decrement 2</button>
+    </div>
+  )

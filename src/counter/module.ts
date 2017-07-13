@@ -32,12 +32,12 @@ export type CounterActions = IncrementAction | DecrementAction
 
 const initialState:CounterState = {num: 0}
 
-export default function reducer(state: CounterState = initialState, action: Action): CounterState {
+export default function reducer(state: CounterState = initialState, action: CounterActions): CounterState {
   switch (action.type) {
     case ActionNames.INC:
-      return {num: state.num + (<IncrementAction>action).plusAmount}
+      return {num: state.num + action.plusAmount}
     case ActionNames.DEC:
-      return {num: state.num - (<DecrementAction>action).minusAmount}
+      return {num: state.num - action.minusAmount}
     default:
       return state
   }
